@@ -1,13 +1,17 @@
 """
 
-Takes data from https://mtgjson.com/
+Takes data from https://mtgjson.com/ and writes it to mtga.json
+
+# mtgajson format
+
+id: {name: str, coloridentity: str, rating: int}
 
 
 """
 
 import json
 
-path = '../LCI.json'
+path = '../data/LCI.json'
 
 with open(path, 'r', encoding='utf-8') as fo:
     data = json.load(fo)
@@ -21,4 +25,7 @@ for card in data['data']['cards']:
     name = card['name']
     print(f'Found [{arena_id}]: {name}')
     result[arena_id] = name
+
+with open('../data/mtga.json', 'w+') as fo:
+    json.dump(result, fo)
 
